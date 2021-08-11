@@ -13,13 +13,13 @@ yargs.command({
       // customize how this option works
       describe: "Note title",
       demandOption: true, // make --title option required
-      type: "string",
+      type: "string"
     },
     body: {
       describe: "Add the body of the note",
       demandOption: true,
-      type: "string",
-    },
+      type: "string"
+    }
   },
   handler: function (argv) {
     // argv holds the arguments from the options
@@ -29,11 +29,19 @@ yargs.command({
 
 yargs.command({
   command: "remove",
-  describe: "Removing a note",
-  handler: function () {
-    console.log("Removing a note");
+  describe: "Remove a note based on its title.",
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string"
+    }
   },
+  handler: function (argv) {
+    notes.removeNote(argv.title);
+  }
 });
+
 
 yargs.command({
   command: "list",
