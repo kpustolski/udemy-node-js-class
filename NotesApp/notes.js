@@ -1,22 +1,13 @@
 const fs = require("fs");
 const chalk = require("chalk");
 
-const getNotes = function () {
-  return "Your notes...";
-};
-
-const addNote = function (title, body) {
+const addNote = (title, body) => {
   const notes = loadNotes();
 
-  // Stores duplicates in the duplicateNotes array
-  // based on whether the titles match
-  // this will run for each note in the notes.json file
-  const duplicateNotes = notes.filter((note) => {
-    return note.title === title;
-  });
+  const duplicateNote = notes.find((note) => note.title === title);
 
   // No duplicates
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     notes.push({
       title: title,
       body: body,
@@ -28,13 +19,11 @@ const addNote = function (title, body) {
   }
 };
 
-const removeNote = function (title) {
+const removeNote = (title) => {
   const notes = loadNotes();
 
   // ALTERNATIVE WAY
-  const updatedNotes = notes.filter((note) => {
-    return note.title !== title;
-  });
+  const updatedNotes = notes.filter((note) => (note.title !== title));
 
   if (updatedNotes.length < notes.length) {
     console.log(chalk.green.inverse("Removed note with title " + title + " from notes.json"));
@@ -46,12 +35,12 @@ const removeNote = function (title) {
 }
 
 // Pass in the notes array
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
 };
 
-const loadNotes = function () {
+const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
     const dataJSON = dataBuffer.toString();
@@ -64,10 +53,35 @@ const loadNotes = function () {
   }
 };
 
+const listNotes = () => {
+  console.log(chalk.inverse("Your Notes: "));
+
+  const notes = loadNotes();
+
+  notes.forEach((note) => {
+    console.log(note.title);
+  });
+};
+
+const readNote = (title) => {
+
+  const notes = loadNotes();
+  const findNote = notes.find((note) => note.title === title);
+
+  if (!findNote) {
+    console.log(chalk.red.inverse("No note with title '" + title + "' found"));
+    return;
+  }
+
+  console.log(chalk.inverse(title));
+  console.log(findNote.body);
+}
+
 // Export an object with properties.
 // This will allow us to use these properties in other files
 module.exports = {
-  getNotes: getNotes,
   addNote: addNote,
-  removeNote: removeNote
+  removeNote: removeNote,
+  listNotes: listNotes,
+  readNote: readNote
 };
