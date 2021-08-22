@@ -11,20 +11,25 @@ if(!address)
 else
 {
   // This stays in app.js
-  geocode(address, (error, data)=> {
+  // We are using object destructuring on the data parameter because
+  // we only need to grab the latitude and logitude data from the geocode data
+  // By default we need to set the destructure object to an empty object
+    geocode(address, (error, { latitude, longitude, location } = {}) => {
       if(error)
       {
         return console.log(error);
       }
-      
-      forecast(data.latitude, data.longitude, (error, forecastdata) => {
+    
+      // We only need to grab three pieces of data from the data returned from the weather stack API.
+      // We can dictate that with object destructuring
+      forecast(latitude, longitude, (error, {weather_description, temperature, feelslike}) => {
         if(error)
         {
           return console.log(error);
         }
         
-        console.log("Location: " + data.location);
-        console.log(forecastdata.weather_description + ". It is currently " + forecastdata.temperature + " degrees out. It feels like " + forecastdata.feelslike + " degrees out.");
+        console.log("Location: " + location);
+        console.log(weather_description + ". It is currently " + temperature + " degrees out. It feels like " + feelslike + " degrees out.");
       });
   });
 }
