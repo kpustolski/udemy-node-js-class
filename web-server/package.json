@@ -1,0 +1,23 @@
+{
+  "name": "udemynodejsreview",
+  "version": "1.0.0",
+  "description": "Contains notes and programs created while taking the \"The Complete Node.js Developer Course (3rd Edition)\" course on Udemy.com to review Node.js. (JavaScript)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/moose15/udemy-node-js-class.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moose15/udemy-node-js-class/issues"
+  },
+  "homepage": "https://github.com/moose15/udemy-node-js-class#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
