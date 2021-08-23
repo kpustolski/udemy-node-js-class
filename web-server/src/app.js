@@ -1,18 +1,10 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
-// We can congfigure what the server should do when someone tries to get the 
-// resource at a specific URL
-// Takes two arguments: 
-// - request (req): Contains info about the incoming request to the server
-// - response (res): Contains methods to customize what we send back to the requester
-// '' stands for the home page (ie. index)
-app.get('', (req, res)=>{
-  // What do we want to do if the user visits the home page?
-  // We can use send() to send something back to the 
-  // Hello Express will appear as text in the browser window.
-  res.send('Hello Express');
-});
+//Route path to index.html
+const publicDirPath = path.join( __dirname, '../public');
+app.use(express.static(publicDirPath));
 
 // /help is the help page eg. app.com/help
 app.get('/help', (req, res) => {
@@ -21,11 +13,14 @@ app.get('/help', (req, res) => {
 
 // /about page
 app.get('/about', (req, res) => {
-  res.send('About page');
+  res.send('<h1>About</h1>');
 });
 
 app.get('/weather', (req, res) => {
-  res.send('Weather page');
+  res.send({
+    forcast: "it is snowing",
+    location: "Philadelphia"
+  });
 });
 
 // Start up the server
