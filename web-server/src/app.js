@@ -4,16 +4,30 @@ const app = express();
 
 //Route path to index.html
 const publicDirPath = path.join( __dirname, '../public');
+
+app.set('view engine', 'hbs');
 app.use(express.static(publicDirPath));
 
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Weather',
+        name: 'Katie'
+    })
+});
 // /help is the help page eg. app.com/help
 app.get('/help', (req, res) => {
-  res.send('Help page');
+  res.render('help', {
+      title: "Help",
+      description: "This is a sentance to help."
+  })
 });
 
 // /about page
 app.get('/about', (req, res) => {
-  res.send('<h1>About</h1>');
+  res.render('about', {
+      title: 'About Me',
+      name: 'Katie'
+  })
 });
 
 app.get('/weather', (req, res) => {
