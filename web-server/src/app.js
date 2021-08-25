@@ -46,6 +46,22 @@ app.get('/weather', (req, res) => {
   });
 });
 
+app.get('/help/*', (req, res) => {
+    res.render( '404', {
+        title: "404",
+        message: "Help article not found.",
+        name: 'Katie Pustolski'
+    });
+});
+
+app.get('*', (req, res) => {
+    res.render( '404', {
+        title: "404",
+        message: "Page not found",
+        name: 'Katie Pustolski'
+
+    });
+});
 // Start up the server
 app.listen(3000, () => {
   // What happens when the server is up and running?
