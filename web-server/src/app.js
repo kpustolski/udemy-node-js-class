@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
+
 const app = express();
 
 //Define paths for Express config
 const publicDirPath = path.join( __dirname, '../public');
-const viewsPath = path.join(__dirname, '../templates');
+const viewsPath = path.join(__dirname, '../templates/views');
 const partialPath = path.join(__dirname, '../templates/partials');
 
 // Setup handlebars engine and views location
@@ -62,6 +63,7 @@ app.get('*', (req, res) => {
 
     });
 });
+
 // Start up the server
 app.listen(3000, () => {
   // What happens when the server is up and running?

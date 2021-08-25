@@ -2,6 +2,8 @@
 <html>
 
 <head>
+     <title>Weather</title>
+     <link rel="icon" href="/img/weather.png">
     <!-- rel is short for 'relationship'
     We can use a relative path (./css/styles.css) 
     or absolute path (/css/styles.css) -->
@@ -10,8 +12,10 @@
 </head>
 
 <body>
-    {{>header}}
-    <p>{{name}}</p>
+    <div class="main-content">
+        {{>header}}
+        <p>Use this site to get your weather!</p>
+    </div>
     {{>footer}}
 </body>
 
