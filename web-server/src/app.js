@@ -41,9 +41,17 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+  if(!req.query.address)
+  {
+    return res.send({
+      error: "app.js :: Missing address query!"
+    });
+  }
+
   res.send({
     forcast: "it is snowing",
-    location: "Philadelphia"
+    location: "Philadelphia",
+    address: req.query.address
   });
 });
 
