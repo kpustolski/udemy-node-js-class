@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
+const forecast = require('./utils/forecast');
+const geocode = require('./utils/geocode');
 
 const app = express();
 
@@ -48,10 +50,23 @@ app.get('/weather', (req, res) => {
     });
   }
 
-  res.send({
-    forcast: "it is snowing",
-    location: "Philadelphia",
-    address: req.query.address
+  geocode(req.query.address, (error, { latitude, longitude, location } = {}) => {
+    if(error){
+      return res.send({ error });
+    }
+
+    forecast(latitude, logitude, (error, forecastData) => {
+      if(error){
+        return res.send({ error });
+      }
+
+      // Everything went well by this point.
+      res.send({
+        forecast: forecastData,
+        location: location,
+        address: req.query.address
+      });
+    });
   });
 });
 
