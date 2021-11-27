@@ -8,15 +8,23 @@
     We can use a relative path (./css/styles.css) 
     or absolute path (/css/styles.css) -->
     <link rel = "stylesheet" href="/css/styles.css">
-    <script src="/js/app.js"></script>
 </head>
 
 <body>
     <div class="main-content">
         {{>header}}
         <p>Use this site to get your weather!</p>
+        <form>
+            <input placeholder="Location">
+            <button>Search</button>
+        </form>
+        
+        <p></p>
+        <p></p>
     </div>
     {{>footer}}
+
+    <script src="/js/app.js"></script>
 </body>
 
 </html>
