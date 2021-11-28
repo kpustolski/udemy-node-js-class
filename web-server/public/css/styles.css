@@ -41,3 +41,16 @@ header a {
     /*Allows an element to grow to take up as much space as is needs*/
     flex-grow: 1; /*1 tells the flex box to take over all of the left over space*/
 }
+
+input {
+    border: 1px solid #cccccc;
+    padding: 8px;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid #888888;
+    background: #888888;
+    color: white;
+    padding: 8px;
+}
