@@ -4,6 +4,7 @@ const yargs = require("yargs");
 const chalk = require("chalk");
 const notes = require("./notes.js");
 
+// Add yargs commads
 yargs.command({
   command: "add",
   describe: "Add a new note",
